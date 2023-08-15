@@ -1,0 +1,4 @@
+apiVersion: v2
+name: nginx-multitenant-chart
+description: A Helm chart for deploying NGINX with multiple tenants
+version: 0.1.0

@@ -1,0 +1,21 @@
+{{- range .Values.tenants }}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nginx-{{ .name }}-ingress
+  namespace: {{ .name }}
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: {{ .name }}.example.com  # Modify this to your domain
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: nginx-{{ .name }}-service
+                port:
+                  number: {{ .port }}
+{{- end }}

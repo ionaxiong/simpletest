@@ -1,0 +1,13 @@
+tenants:
+  - name: tenant1
+    replicaCount: 2
+    port: 80
+  - name: tenant2
+    replicaCount: 3
+    port: 81
+
+image:
+  repository: nginx:latest
+
+service:
+  type: NodePort

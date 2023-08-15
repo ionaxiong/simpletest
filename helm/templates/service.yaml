@@ -1,0 +1,17 @@
+{{- $type := .Values.service.type }}
+{{- range .Values.tenants }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-{{ .name }}-service
+  namespace: {{ .name }}
+spec:
+  selector:
+    app: nginx-{{ .name }}
+  ports:
+    - protocol: TCP
+      port: {{ .port }}
+      targetPort: 80
+  type: {{ $type }}
+{{- end }}

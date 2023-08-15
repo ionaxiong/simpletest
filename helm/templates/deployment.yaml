@@ -1,0 +1,24 @@
+{{- $repository := .Values.image.repository }}
+{{- range .Values.tenants }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-{{ .name }}-deployment
+  namespace: {{ .name }}
+spec:
+  replicas: {{ .replicaCount }}
+  selector:
+    matchLabels:
+      app: nginx-{{ .name }}
+  template:
+    metadata:
+      labels:
+        app: nginx-{{ .name }}
+    spec:
+      containers:
+        - name: nginx
+          image: {{ $repository }}
+          ports:
+            - containerPort: 80
+{{- end }}
